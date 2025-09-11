@@ -1,0 +1,154 @@
+@use "./index" as *;
+
+html {
+  background: $color-bg-blue;
+  font-family: $font-family-base;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 2rem;
+  @include flex-center(column);
+}
+
+.main-container {
+  background: $color-white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $color-text-dark;
+}
+
+.header-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: $color-text-dark;
+  font-weight: 500;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.5rem;
+  height: 500px;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.card-content {
+  padding: 1.5rem;
+  height: 100%;
+  @include flex-center(column);
+}
+
+.card-yellow {
+  background: $color-yellow;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-text-dark;
+  }
+}
+
+.card-gradient {
+  background: linear-gradient(135deg, #5b9bd5 0%, #87ceeb 100%);
+  grid-row: span 2;
+}
+
+.card-white {
+  background: $color-white;
+
+  .notification {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .bell-icon {
+    font-size: 1.5rem;
+    color: $color-orange;
+    flex-shrink: 0;
+  }
+
+  .notification-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: $color-text-dark;
+    font-weight: 500;
+  }
+}
+
+.card-white-empty {
+  background: $color-white;
+}
+
+.card-orange {
+  background: $color-orange;
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .card-gradient {
+    grid-row: span 1;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .header-nav {
+    gap: 1rem;
+  }
+}
