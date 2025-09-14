@@ -11,6 +11,9 @@ import "~/shared/styles/components/_assets.scss";
 import "~/shared/styles/components/_layout.scss";
 import "~/shared/styles/components/_marquee.scss";
 import "~/shared/styles/components/_slider-main.scss";
+//страницы
+import "~/shared/styles/pages/home/index.scss";
+//слайдер
 import "swiper/css";
 import "swiper/css/navigation";
 

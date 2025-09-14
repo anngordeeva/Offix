@@ -1,6 +1,7 @@
 /** @type {import('vite').UserConfig} */
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import { resolve } from 'node:path'
 
 export default defineConfig({
   base: './', 
@@ -14,6 +15,15 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `@use "~/shared/styles/index" as *;\n`
+      }
+    }
+
+  },
+  build:{
+    rollupOptions:{
+      input: {
+        "index": resolve(__dirname, './index.html'),
+        "page.home": resolve(__dirname, './src/pages/home.html')
       }
     }
   }
