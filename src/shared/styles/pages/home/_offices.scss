@@ -37,3 +37,22 @@
     }
   }
 }
+
+
+@include tablet {
+  .offices {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  
+.offices__title {
+  gap: 8px;
+  align-items: baseline;
+
+  &::after {
+  width: 32px;
+  height: 32px;
+  }
+}
+}

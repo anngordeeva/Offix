@@ -95,8 +95,7 @@
   }
 }
 
-// Адаптивность
-@media (max-width: 768px) {
+@include tablet {
   .faq {
     &__button {
       width: 40px;
@@ -106,5 +105,10 @@
     &__title-wrapper {
       align-items: flex-start;
     }
+
+    &__content {
+      gap: 32px;
+    }
+
   }
 }

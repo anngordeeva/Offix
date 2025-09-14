@@ -56,21 +56,6 @@ export class App {
   }
 
   /**
-   * Показывает страницу ошибки
-   */
-  showErrorPage() {
-    document.body.innerHTML = `
-      <div class="page">
-        <div class="main-container">
-          <h1>Ошибка загрузки</h1>
-          <p>Не удалось загрузить страницу. Проверьте консоль браузера.</p>
-          <a href="#" data-page="home">Вернуться на главную</a>
-        </div>
-      </div>
-    `;
-  }
-
-  /**
    * Инициализирует компоненты
    */
   initComponents() {
@@ -137,19 +122,6 @@ export class App {
     const modal = document.createElement("div");
     modal.className = "modal-overlay";
     modal.innerHTML = `
-      <div class="modal-container">
-        <div class="modal-header">
-          <h2>Тестовое модальное окно</h2>
-          <button class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Простая архитектура для верстки!</p>
-          <p>Легко перейти на любой фреймворк.</p>
-        </div>
-        <div class="modal-footer">
-          <button class="modal-btn modal-btn-primary">OK</button>
-        </div>
-      </div>
     `;
 
     document.body.appendChild(modal);

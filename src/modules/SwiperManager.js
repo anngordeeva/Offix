@@ -1,5 +1,5 @@
 import Swiper from "swiper";
-import { Navigation } from "swiper/modules";
+import { EffectFade, Navigation } from "swiper/modules";
 
 /**
  * Менеджер для управления Swiper слайдерами
@@ -26,7 +26,7 @@ export class SwiperManager {
     }
 
     const defaultOptions = {
-      modules: [Navigation],
+      modules: [Navigation, EffectFade],
       loop: true,
       centeredSlides: true,
       navigation: {
