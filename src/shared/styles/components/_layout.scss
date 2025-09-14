@@ -2,17 +2,62 @@
 .section {
   margin: 0 auto;
   width: 100%;
+
+  &--slider {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    overflow: hidden;
+  }
+}
+
+.section__title {
+  @include caption;
+
+  padding: 0 70px 16px 0;
+  height: fit-content;
+  width: fit-content;
+  border-bottom: 1px solid $light-gray;
+  font-family: $font-family-mono;
+  color: $dark-gray;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: $color-text-dark;
 }
 
 .container {
+  position: relative;
   width: 100%;
   max-width: 1744px;
   padding: 0 40px;
+  margin: 0 auto;
+
+  &.p-vertical {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+.container-grid {
+  display: grid;
+  grid-template-columns: 25% 1fr;
+  gap: 48px;
 }
 
 // Адаптивность для основного макета
 @include tablet {
   .container {
     padding: 0 16px;
+
+    &.p-vertical {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+
+  .container-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
 }

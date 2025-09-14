@@ -1,0 +1,259 @@
+.slider-main {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  max-width: 1744px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  height: 568px;
+
+  .swiper-slide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    width: 392px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+
+    &:hover {
+      .slider__image-wrapper::after {
+        transform: translateY(0);
+      }
+
+      .slider__title {
+        color: $dark-gray;
+      }
+
+      .slider__content .slider__link::after {
+        width: 100%;
+      }
+    }
+
+    .slider__image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 260px; // Высота по умолчанию
+      overflow: hidden;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 46px;
+        height: 46px;
+        background-image: url("../../assets/icons/ArrowRight.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px;
+        background-color: $primary;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+      }
+    }
+
+    .slider__content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .slider__content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .slider__title {
+        @include headline-three;
+        letter-spacing: -1px;
+        transition: color 0.3s ease;
+        &.blog {
+          @include headline-four;
+        }
+      }
+
+      .slider__list-benefits {
+        display: flex;
+        gap: 16px;
+
+        .slider__benefit {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          img {
+            width: 18px;
+            height: 18px;
+          }
+
+          .slider__benefit-title {
+            @include caption;
+
+            text-transform: uppercase;
+            color: $dark-gray;
+          }
+        }
+      }
+
+      .slider__price-wrapper {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+
+        .slider__price {
+          @include body;
+        }
+
+        .slider__date {
+          font-size: 16px;
+          line-height: 18px;
+          color: $dark-gray;
+        }
+      }
+
+      .slider__date {
+        @include caption;
+
+        font-family: $font-family-mono;
+        color: $dark-gray;
+        text-transform: uppercase;
+      }
+
+      .slider__description {
+        @include body;
+
+        color: $dark-gray;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .slider__link {
+        font-size: 16px;
+        line-height: 18px;
+        display: inline-block;
+        position: relative;
+        width: fit-content;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background-color: $black;
+          transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
+      }
+
+      &.blog {
+        gap: 8px;
+      }
+    }
+
+    // Предыдущий слайд
+    &.swiper-slide-prev {
+      width: 392px;
+    }
+
+    // Активный слайд
+    &.swiper-slide-active {
+      width: 675px; // Увеличиваем ширину активного слайда
+
+      .slider__image-wrapper {
+        height: 450px; // Увеличиваем высоту изображения
+        width: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &.swiper-slide-next {
+      width: 392px;
+    }
+
+    .swiper__link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.swipe_nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swiper__button-prev,
+.swiper__button-next {
+  width: 46px;
+  height: 46px;
+  background: $light-gray;
+  border: 1px solid $white-6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../assets/icons/ArrowRightDark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+}
+
+.swiper__button-prev {
+  transform: rotate(180deg);
+}
+
+// Специфичные стили для кнопок news__swiper
+.news__swiper-prev,
+.news__swiper-next {
+  width: 46px;
+  height: 46px;
+  background: $light-gray;
+  border: 1px solid $white-6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../assets/icons/ArrowRightDark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+}
+
+.news__swiper-prev {
+  transform: rotate(180deg);
+}
+
+.swiper-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 568px;
+  transform: translateX(calc(50% - 675px / 2 - 392px - 32px));
+}

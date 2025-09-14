@@ -21,6 +21,7 @@
   font-size: 16px;
   font-weight: 500;
   font-family: inherit;
+  text-wrap: nowrap;
   background-color: $bg;
   color: $fg;
   cursor: pointer;
@@ -33,7 +34,7 @@
     right: 46px;
     height: 100%;
     width: 1px;
-    background-color: $br-color
+    background-color: $br-color;
   }
 
   &::after {
@@ -44,7 +45,7 @@
     background-color: $arrow-color;
     width: 18px;
     height: 18px;
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
   }
 
   &:hover {
@@ -132,10 +133,15 @@
   }
 }
 
-
 // Брейкпоинты
+@mixin laptop {
+  @media (max-width: 1440px) {
+    @content;
+  }
+}
+
 @mixin tablet {
-  @media (max-width: 1015px) {
+  @media (max-width: 1150px) {
     @content;
   }
 }

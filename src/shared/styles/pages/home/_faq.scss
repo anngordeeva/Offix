@@ -1,0 +1,110 @@
+.faq {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+
+  &__title {
+    @include headline-two;
+
+    letter-spacing: -2px;
+  }
+
+  &__item {
+    border-bottom: 1px solid $gray;
+    padding: 32px 0;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  &__question {
+    @include headline-four;
+
+    font-weight: 500;
+    letter-spacing: -1px;
+  }
+
+  &__button {
+    width: 46px;
+    height: 46px;
+    background-color: $light-gray;
+    border: 1px solid $gray;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $black;
+      transition: all 0.3s ease;
+    }
+
+    &::before {
+      width: 14px;
+      height: 1px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &::after {
+      width: 1px;
+      height: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__answer {
+    @include body;
+
+    color: $dark-gray;
+    margin: 0;
+    padding-top: 0;
+    max-width: 958px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  &__item.active {
+    .faq__answer {
+      max-height: 200px;
+      opacity: 1;
+      padding-top: 16px;
+    }
+
+    .faq__button {
+      &::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+        opacity: 0;
+      }
+    }
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .faq {
+    &__button {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__title-wrapper {
+      align-items: flex-start;
+    }
+  }
+}

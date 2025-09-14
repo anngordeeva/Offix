@@ -1,5 +1,5 @@
 // Цвета темы
-$color-bg-white: #FFFFFF;
+$color-bg-white: #ffffff;
 $color-fg-dark: #e6e6e6;
 $color-primary: #646cff;
 $color-primary-hover: #747bff;
@@ -7,19 +7,21 @@ $color-muted: #888;
 $color-border: #2a2f3a;
 
 // Цвета для макета
-$color-bg-blue: #4A90E2;
-$color-yellow: #FFD700;
-$primary: #113E3A;
+$color-bg-blue: #4a90e2;
+$color-yellow: #ffd700;
+$primary: #113e3a;
 $secondary: #142528;
-$white: #FFFFFF;
-$white-6: #FFFFFF0F;
-$gray: #E8EDED;
-$black: #0B1E21;
+$white: #ffffff;
+$white-6: #ffffff0f;
+$gray: #e8eded;
+$light-gray: #f4f8f8;
+$dark-gray: #778b8e;
+$black: #0b1e21;
 $color-text-dark: #333333;
 
 // Типографика
-$font-family-base: 'Manrope', system-ui, Avenir, Helvetica, Arial, sans-serif;
-$font-family-mono: 'RobotoMono', 'Courier New', monospace;
+$font-family-base: "Manrope", system-ui, Avenir, Helvetica, Arial, sans-serif;
+$font-family-mono: "RobotoMono", "Courier New", monospace;
 $line-height-base: 1.5;
 $font-weight-regular: 400;
 $font-weight-medium: 500;
@@ -45,7 +47,6 @@ $body-mobile: 14px;
 
 $caption-desktop: 12px;
 $caption-mobile: 10px;
-
 
 // Размеры
 $radius-md: 8px;

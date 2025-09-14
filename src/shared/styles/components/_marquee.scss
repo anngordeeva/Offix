@@ -1,0 +1,53 @@
+.marquee {
+  padding: 48px 0;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: $light-gray;
+  position: relative;
+}
+
+.marquee__container {
+  display: flex;
+  align-items: center;
+  width: 200%;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+.marquee__root {
+  display: flex;
+  align-items: center;
+  gap: 128px;
+  flex-shrink: 0;
+  min-width: 50%;
+  justify-content: space-around;
+}
+
+.marquee__root img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+@include tablet {
+  .marquee {
+    padding: 32px 0;
+  }
+
+  .marquee__root {
+    gap: 64px;
+  }
+
+  .marquee__root img {
+    height: 24px;
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%); // Сдвигаем на половину, чтобы вторая копия заняла место первой
+  }
+}
