@@ -1,0 +1,122 @@
+// Стили для страницы About
+.about-hero {
+  background: $white;
+  padding: 6rem 0 4rem;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    color: $color-text-dark;
+    margin-bottom: 1.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+
+    @include mobile {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: $color-muted;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include mobile {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.about-content {
+  padding: 4rem 0;
+  background: $white;
+
+  .container {
+    max-width: 1200px;
+  }
+}
+
+.about-section {
+  margin-bottom: 4rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    font-weight: $font-weight-bold;
+    margin-bottom: 1.5rem;
+    color: $color-text-dark;
+
+    @include tablet {
+      font-size: 2rem;
+    }
+
+    @include mobile {
+      font-size: 1.75rem;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: $color-muted;
+    margin-bottom: 1.5rem;
+
+    @include mobile {
+      font-size: 1rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: $color-muted;
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: $primary;
+        font-weight: $font-weight-bold;
+      }
+
+      @include mobile {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// Адаптивность
+@include tablet {
+  .about-hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .about-content {
+    padding: 3rem 0;
+  }
+}
+
+@include mobile {
+  .about-hero {
+    padding: 3rem 0 2rem;
+  }
+
+  .about-content {
+    padding: 2rem 0;
+  }
+}

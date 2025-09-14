@@ -1,0 +1,102 @@
+// Стили модального окна
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: $white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+
+  h2 {
+    margin: 0;
+    color: $color-text-dark;
+    font-family: $font-family-base;
+    font-weight: $font-weight-bold;
+  }
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: $color-muted;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: $color-text-dark;
+  }
+}
+
+.modal-body {
+  padding: 1.5rem;
+
+  p {
+    margin: 0 0 1rem 0;
+    color: $color-text-dark;
+    line-height: 1.5;
+    font-family: $font-family-base;
+    font-weight: $font-weight-regular;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.modal-btn {
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+
+  &.modal-btn-primary {
+    background: $color-primary;
+    color: $white;
+  }
+}
+
+// Адаптивность для модального окна
+@media (max-width: 768px) {
+  .modal-container {
+    width: 95%;
+    margin: 1rem;
+  }
+}

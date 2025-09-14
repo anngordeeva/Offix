@@ -1,0 +1,170 @@
+// Стили для страницы FAQ
+.faq-hero {
+  background: $white;
+  padding: 6rem 0 4rem;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    color: $color-text-dark;
+    margin-bottom: 1.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+
+    @include mobile {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: $color-muted;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include mobile {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.faq-content {
+  padding: 4rem 0;
+  background: $white;
+
+  .container {
+    max-width: 1200px;
+  }
+}
+
+.faq-section {
+  margin-bottom: 4rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    font-weight: $font-weight-bold;
+    margin-bottom: 1.5rem;
+    color: $color-text-dark;
+
+    @include tablet {
+      font-size: 2rem;
+    }
+
+    @include mobile {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+.faq-item {
+  background: $white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.faq-question {
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: $font-weight-medium;
+  color: $color-text-dark;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: #e9ecef;
+  }
+
+  &::after {
+    content: "+";
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    color: $primary;
+    transition: transform 0.3s ease;
+  }
+
+  &.active::after {
+    transform: rotate(45deg);
+  }
+
+  @include mobile {
+    font-size: 1rem;
+    padding: 1.25rem;
+  }
+}
+
+.faq-answer {
+  padding: 0 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &.active {
+    padding: 1.5rem;
+    max-height: 200px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $color-muted;
+    margin: 0;
+
+    @include mobile {
+      font-size: 0.95rem;
+    }
+  }
+
+  @include mobile {
+    padding: 0 1.25rem;
+
+    &.active {
+      padding: 1.25rem;
+    }
+  }
+}
+
+// Адаптивность
+@include tablet {
+  .faq-hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .faq-content {
+    padding: 3rem 0;
+  }
+}
+
+@include mobile {
+  .faq-hero {
+    padding: 3rem 0 2rem;
+  }
+
+  .faq-content {
+    padding: 2rem 0;
+  }
+}

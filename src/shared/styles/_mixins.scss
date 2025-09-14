@@ -1,3 +1,6 @@
+@use "./variables" as *;
+@forward "./variables";
+
 // Центрирование flex-ом
 @mixin flex-center($direction: row, $gap: 0) {
   display: flex;
@@ -8,25 +11,137 @@
 }
 
 // Кнопка по теме
-@mixin button($bg, $fg, $radius: $radius-md) {
-  border-radius: $radius;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+@mixin button($bg, $fg, $br-color, $arrow-color) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 14px 16px 14px;
+  border: none;
+  font-size: 16px;
   font-weight: 500;
   font-family: inherit;
   background-color: $bg;
   color: $fg;
   cursor: pointer;
-  transition:
-    border-color 0.25s,
-    background-color 0.25s,
-    color 0.25s;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 46px;
+    height: 100%;
+    width: 1px;
+    background-color: $br-color
+  }
+
+  &::after {
+    content: "";
+    mask-image: url("data:image/svg+xml;base64, PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1LjU4NTUgOS4zOTc5N0wxMC41MjMgMTQuNDYwNUMxMC40MTc0IDE0LjU2NiAxMC4yNzQzIDE0LjYyNTMgMTAuMTI1IDE0LjYyNTNDOS45NzU3MyAxNC42MjUzIDkuODMyNTggMTQuNTY2IDkuNzI3MDMgMTQuNDYwNUM5LjYyMTQ4IDE0LjM1NDkgOS41NjIxOSAxNC4yMTE4IDkuNTYyMTkgMTQuMDYyNUM5LjU2MjE5IDEzLjkxMzIgOS42MjE0OCAxMy43NzAxIDkuNzI3MDMgMTMuNjY0NUwxMy44Mjk4IDkuNTYyNUgyLjgxMjVDMi42NjMzMiA5LjU2MjUgMi41MjAyNCA5LjUwMzI0IDIuNDE0NzUgOS4zOTc3NUMyLjMwOTI2IDkuMjkyMjYgMi4yNSA5LjE0OTE4IDIuMjUgOUMyLjI1IDguODUwODIgMi4zMDkyNiA4LjcwNzc0IDIuNDE0NzUgOC42MDIyNUMyLjUyMDI0IDguNDk2NzYgMi42NjMzMiA4LjQzNzUgMi44MTI1IDguNDM3NUgxMy44Mjk4TDkuNzI3MDMgNC4zMzU0N0M5LjYyMTQ4IDQuMjI5OTIgOS41NjIxOSA0LjA4Njc3IDkuNTYyMTkgMy45Mzc1QzkuNTYyMTkgMy43ODgyMyA5LjYyMTQ4IDMuNjQ1MDggOS43MjcwMyAzLjUzOTUzQzkuODMyNTggMy40MzM5OCA5Ljk3NTczIDMuMzc0NjkgMTAuMTI1IDMuMzc0NjlDMTAuMjc0MyAzLjM3NDY5IDEwLjQxNzQgMy40MzM5OCAxMC41MjMgMy41Mzk1M0wxNS41ODU1IDguNjAyMDNDMTUuNjM3OCA4LjY1NDI3IDE1LjY3OTMgOC43MTYzMSAxNS43MDc2IDguNzg0NkMxNS43MzU5IDguODUyODggMTUuNzUwNCA4LjkyNjA4IDE1Ljc1MDQgOUMxNS43NTA0IDkuMDczOTIgMTUuNzM1OSA5LjE0NzEyIDE1LjcwNzYgOS4yMTU0QzE1LjY3OTMgOS4yODM2OSAxNS42Mzc4IDkuMzQ1NzMgMTUuNTg1NSA5LjM5Nzk3WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background-color: $arrow-color;
+    width: 18px;
+    height: 18px;
+    transition: transform .3s ease-in-out;
+  }
+
+  &:hover {
+    &::after {
+      transform: translateX(6px);
+    }
+  }
+
+  @include tablet {
+    padding: 12px 16px 13px;
+    max-height: 40px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 
-// Контейнер
-@mixin container {
-  max-width: $container-max;
-  margin: 0 auto;
-  padding: $space-6;
+//Типографика
+@mixin headline-one {
+  font-size: $headline-one-desktop;
+  line-height: 72px;
+
+  @include tablet {
+    font-size: $headline-one-mobile;
+    line-height: 42px;
+  }
+}
+
+@mixin headline-two {
+  font-size: $headline-two-desktop;
+  line-height: 48px;
+
+  @include tablet {
+    font-size: $headline-two-mobile;
+    line-height: 36px;
+  }
+}
+
+@mixin headline-three {
+  font-size: $headline-three-desktop;
+  line-height: 36px;
+
+  @include tablet {
+    font-size: $headline-three-mobile;
+    line-height: 28px;
+  }
+}
+
+@mixin headline-four {
+  font-size: $headline-four-desktop;
+  line-height: 28px;
+
+  @include tablet {
+    font-size: $headline-four-mobile;
+    line-height: 26px;
+  }
+}
+
+@mixin body-large {
+  font-size: $body-large-desktop;
+  line-height: 32px;
+
+  @include tablet {
+    font-size: $body-large-mobile;
+    line-height: 24px;
+  }
+}
+
+@mixin body {
+  font-size: $body-desktop;
+  line-height: 30px;
+
+  @include tablet {
+    font-size: $body-mobile;
+    line-height: 22px;
+  }
+}
+
+@mixin caption {
+  font-size: $caption-desktop;
+  line-height: 20px;
+
+  @include tablet {
+    font-size: $caption-mobile;
+    line-height: 18px;
+  }
+}
+
+
+// Брейкпоинты
+@mixin tablet {
+  @media (max-width: 1015px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
 }

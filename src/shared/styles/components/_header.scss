@@ -1,0 +1,270 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 2.125rem 0;
+  border-bottom: 1px solid $white-6;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+
+  &.header--white-bg {
+    background-color: $white;
+
+    .header__nav-link {
+      color: $black;
+
+      &::after {
+        background-color: $primary;
+      }
+
+      &.active {
+        color: $black;
+      }
+    }
+
+    .header__logo img {
+      content: url("/src/shared/assets/logos/logo-offix-dark.svg");
+      min-height: 36px;
+    }
+
+    .burger {
+      background: $gray;
+    }
+  }
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.header__logo {
+  img {
+    transition: all 0.3s ease;
+  }
+}
+
+.header__root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+}
+
+.header__nav-link {
+  position: relative;
+  padding: 0 24px;
+  text-decoration: none;
+  color: $white;
+  font-weight: $font-weight-medium;
+  font-family: $font-family-base;
+  font-size: 16px;
+  line-height: 18px;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -48px;
+    left: 50%;
+    background-color: $white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  &:hover::after,
+  &.active::after {
+    width: 100%;
+  }
+
+  &.active {
+    color: $white;
+  }
+}
+
+.header__button {
+  @include button($primary, $white, $white-6, $white);
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $white;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+
+  &.active {
+    .burger__line {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(3px, 3px);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(3px, -3px);
+      }
+    }
+  }
+}
+
+.burger__root {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.burger__line {
+  display: block;
+  width: 12px;
+  height: 2px;
+  background-color: $black;
+  transition: all 0.3s ease;
+  transform-origin: center;
+  border-radius: 2px;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: -100%;
+  width: 100svw;
+  height: 100vh;
+  z-index: 1000;
+  transition: right 0.3s ease;
+
+  &.active {
+    right: 0;
+  }
+}
+
+.mobile-menu__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, rgba(20, 37, 40, 0) 0%, rgba(20, 37, 40, 0.8) 100%);
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.active .mobile-menu__overlay {
+  opacity: 1;
+}
+
+.mobile-menu__content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  right: 0;
+  width: 80%;
+  max-width: 400px;
+  height: 100%;
+  background-color: $white;
+  padding: 48px 16px 128px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu.active .mobile-menu__content {
+  transform: translateX(0);
+}
+
+.mobile-menu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.mobile-menu__link {
+  display: block;
+  text-decoration: none;
+  color: $black;
+  font-weight: $font-weight-medium;
+  font-size: 32px;
+  line-height: 32px;
+  border-bottom: 1px solid $white-6;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.mobile-menu__social-list {
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-menu__social-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: $primary;
+}
+
+@include tablet {
+  .header {
+    padding: 20px 0;
+
+    &.header--white-bg {
+      .header__logo img {
+        min-height: unset;
+        max-height: 28px;
+      }
+    }
+  }
+  .burger {
+    display: flex;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__root {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .header__logo img {
+    max-height: 28px;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+}
+
+@include mobile {
+  .mobile-menu__overlay {
+    display: none;
+  }
+
+  .mobile-menu__content {
+    max-width: none;
+    width: 100%;
+  }
+}
