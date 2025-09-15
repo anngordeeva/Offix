@@ -1,0 +1,147 @@
+.price {
+  background-color: $black;
+}
+
+.price__container {
+  padding-top: 236px !important;
+  padding-bottom: 236px !important;
+}
+.price__title {
+  @include headline-two;
+
+  color: $white;
+  letter-spacing: -2px;
+}
+
+.price__description {
+  @include body;
+
+  color: $dark-gray;
+}
+
+.price__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.price__item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 48px;
+  background-color: $secondary;
+  color: $white;
+
+  &.dark {
+    background-color: $primary;
+  }
+}
+
+.price__item-title {
+  @include caption;
+  
+  padding-bottom: 16px;
+  border-bottom: 1px solid $white-6;
+  color: $dark-gray;
+  text-transform: uppercase;
+  font-family: $font-family-mono;
+}
+
+.price__item-content,
+.price__features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.rice__price-wrapper {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.price__item-price {
+  @include headline-two;
+}
+
+.price__item-date {
+  @include headline-four;
+
+  color: $dark-gray;
+}
+
+.price__item-description {
+  @include body-large;
+
+  color: $dark-gray;
+}
+
+.price__features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.price__feature {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &::before {
+    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    background-color: $white-6;
+    border: 1px solid $white-6;
+    background-image: url("/src/shared/assets/icons/CheckWhite.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.price__button {
+  @include button($white, $black, $gray, $black);
+
+  position: relative;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    right: 14px;
+  }
+}
+
+@include laptop {
+  .price__container {
+    padding-top: 96px !important;
+    padding-bottom: 96px !important;
+  }
+}
+
+@include tablet {
+  .price__container {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .price__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .price__item {
+    padding: 32px;
+  }
+
+  .price__item-content {
+    margin-bottom: 8px;
+  }
+}

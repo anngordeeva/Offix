@@ -23,7 +23,8 @@ export default defineConfig({
     rollupOptions:{
       input: {
         "index": resolve(__dirname, './index.html'),
-        "page.home": resolve(__dirname, './src/pages/home.html')
+        "page.home": resolve(__dirname, './src/pages/home.html'),
+        "page.virtual-office": resolve(__dirname, './src/pages/virtual-office.html')
       }
     }
   }
