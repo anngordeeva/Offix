@@ -89,7 +89,7 @@ export class App {
     document.addEventListener("click", e => {
       if (e.target.matches("[data-page]")) {
         e.preventDefault();
-        const page = e.target.getAttribute("data-page");
+        const page = e.target.getAttribute("data-page") || "home";
         this.loadPage(page);
       }
     });

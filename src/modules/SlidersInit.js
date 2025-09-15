@@ -63,8 +63,41 @@ function getSlidersConfig(pageName) {
         },
       },
     },
+    "virtual-office": {
+      ".reviews__swiper": {
+        slidesPerView: 1,
+        loop: false,
+
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+
+        allowTouchMove: true,
+        speed: 500,
+        navigation: {
+          nextEl: ".reviews__swiper-next",
+          prevEl: ".reviews__swiper-prev",
+        },
+      },
+      ".news__swiper": {
+        slidesPerView: "auto",
+        centeredSlides: false,
+        loop: true,
+        initialSlide: 0,
+        spaceBetween: 32,
+        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
+        slidesOffsetAfter: 0,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        navigation: {
+          nextEl: ".news__swiper-next",
+          prevEl: ".news__swiper-prev",
+        },
+      },
+    },
     about: {
-      // Здесь можно добавить конфигурацию для других страниц
+      // TODO: add config all page
     },
   };
 

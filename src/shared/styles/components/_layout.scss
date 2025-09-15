@@ -23,6 +23,11 @@
   text-transform: uppercase;
   font-weight: 400;
   color: $color-text-dark;
+
+  &.white {
+    color: $white;
+    border-color: $white-6;
+  }
 }
 
 .container {
@@ -41,7 +46,13 @@
 .container-grid {
   display: grid;
   grid-template-columns: 25% 1fr;
-  gap: 48px;
+  gap: 32px;
+}
+
+.container-grid__left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 // Адаптивность для основного макета
