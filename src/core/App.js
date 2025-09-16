@@ -22,6 +22,14 @@ export class App {
     this.bindEvents();
     this.initComponents();
     this.loadPage("home");
+
+    // Обработчик для кнопки "Назад" браузера
+    window.addEventListener("popstate", event => {
+      const page = event.state?.page || this.getPageFromUrl();
+      if (page !== this.currentPage) {
+        this.loadPageWithoutHistory(page);
+      }
+    });
   }
 
   /**
@@ -40,6 +48,11 @@ export class App {
       }
 
       this.currentPage = pageName;
+
+      // Обновляем URL без перезагрузки страницы
+      const url = pageName === "home" ? "/" : `/${pageName}`;
+      window.history.pushState({ page: pageName }, "", url);
+
       this.initComponents(); // Инициализируем компоненты после загрузки страницы
 
       // Уведомляем header о смене страницы
@@ -121,6 +134,45 @@ export class App {
     window.addEventListener("resize", () => {
       this.smoothScroll.updateHeaderHeight();
     });
+  }
+
+  /**
+   * Загружает страницу без обновления истории браузера
+   */
+  async loadPageWithoutHistory(pageName) {
+    try {
+      // Загружаем HTML страницы
+      const response = await fetch(`/src/pages/${pageName}.html`);
+      const html = await response.text();
+
+      // Вставляем контент в контейнер страницы
+      const pageContent = document.getElementById("page-content");
+      if (pageContent) {
+        pageContent.innerHTML = html;
+      }
+
+      this.currentPage = pageName;
+      this.initComponents(); // Инициализируем компоненты после загрузки страницы
+
+      // Уведомляем header о смене страницы
+      if (this.components.header) {
+        this.components.header.onPageChange(pageName);
+      }
+
+      // Инициализируем слайдеры после загрузки страницы
+      this.initSliders();
+    } catch {
+      this.showErrorPage();
+    }
+  }
+
+  /**
+   * Получает название страницы из URL
+   */
+  getPageFromUrl() {
+    const path = window.location.pathname;
+    const page = path.split("/").pop() || "home";
+    return page.replace(".html", "");
   }
 
   /**
