@@ -17,11 +17,15 @@ export class Header {
     this.burgerBtn = document.getElementById("burger-btn");
     this.mobileMenu = document.getElementById("mobile-menu");
     this.navLinks = document.querySelectorAll(".header__nav-link");
+    this.logo = document.querySelector(".header__logo");
 
     this.bindEvents();
     this.setupMobileMenu();
     this.initScrollHandler();
     this.updateHeaderState();
+
+    const currentPage = this.getCurrentPage();
+    this.setActiveLink(currentPage);
   }
 
   bindEvents() {
@@ -34,6 +38,10 @@ export class Header {
       if (overlay) {
         overlay.addEventListener("click", () => this.closeMobileMenu());
       }
+    }
+
+    if (this.logo) {
+      this.logo.addEventListener("click", () => this.closeMobileMenu());
     }
 
     this.navLinks.forEach(link => {
@@ -127,13 +135,39 @@ export class Header {
   /**
    * Обновляет состояние при изменении страницы
    */
-  onPageChange() {
+  onPageChange(pageName) {
     this.updateHeaderState();
+    this.setActiveLink(pageName);
+  }
+
+  /**
+   * Устанавливает активную ссылку
+   */
+  setActiveLink(pageName) {
+    this.navLinks.forEach(link => {
+      link.classList.remove("active");
+    });
+
+    if (pageName === "home") {
+      return;
+    }
+
+    const activeLink = Array.from(this.navLinks).find(link => {
+      const linkPage = link.getAttribute("data-page");
+      return linkPage === pageName;
+    });
+
+    if (activeLink) {
+      activeLink.classList.add("active");
+    }
   }
 
   update() {
     this.navLinks = document.querySelectorAll(".header__nav-link");
     this.setupMobileMenu();
     this.updateHeaderState();
+
+    const currentPage = this.getCurrentPage();
+    this.setActiveLink(currentPage);
   }
 }

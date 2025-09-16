@@ -19,9 +19,9 @@ export class App {
    * Инициализирует приложение
    */
   init() {
-    this.loadPage("home");
     this.bindEvents();
     this.initComponents();
+    this.loadPage("home");
   }
 
   /**
@@ -33,15 +33,18 @@ export class App {
       const response = await fetch(`/src/pages/${pageName}.html`);
       const html = await response.text();
 
-      // Вставляем в body
-      document.body.innerHTML = html;
+      // Вставляем контент в контейнер страницы
+      const pageContent = document.getElementById("page-content");
+      if (pageContent) {
+        pageContent.innerHTML = html;
+      }
 
       this.currentPage = pageName;
       this.initComponents(); // Инициализируем компоненты после загрузки страницы
 
       // Уведомляем header о смене страницы
       if (this.components.header) {
-        this.components.header.onPageChange();
+        this.components.header.onPageChange(pageName);
       }
 
       // Инициализируем слайдеры после загрузки страницы
@@ -59,13 +62,13 @@ export class App {
    * Инициализирует компоненты
    */
   initComponents() {
-    // Инициализируем Header компонент
-    if (document.querySelector(".header")) {
+    // Инициализируем Header компонент только один раз
+    if (document.querySelector(".header") && !this.components.header) {
       this.components.header = new Header();
       this.components.header.init();
     }
 
-    // Инициализируем FAQ аккордеон
+    // Инициализируем FAQ аккордеон для текущей страницы
     if (document.querySelector(".faq")) {
       this.components.faqAccordion = new FaqAccordion(".faq");
     }
@@ -87,10 +90,15 @@ export class App {
   bindEvents() {
     // Обработчик для навигации
     document.addEventListener("click", e => {
-      if (e.target.matches("[data-page]")) {
-        e.preventDefault();
-        const page = e.target.getAttribute("data-page") || "home";
-        this.loadPage(page);
+      let target = e.target;
+      while (target && target !== document.body) {
+        if (target.matches("[data-page]")) {
+          e.preventDefault();
+          const page = target.getAttribute("data-page");
+          this.loadPage(page);
+          return;
+        }
+        target = target.parentElement;
       }
     });
 
@@ -113,6 +121,23 @@ export class App {
     window.addEventListener("resize", () => {
       this.smoothScroll.updateHeaderHeight();
     });
+  }
+
+  /**
+   * Показывает страницу ошибки
+   */
+  showErrorPage() {
+    const pageContent = document.getElementById("page-content");
+    if (pageContent) {
+      pageContent.innerHTML = `
+        <div class="section">
+          <div class="container">
+            <h1>Ошибка загрузки страницы</h1>
+            <p>К сожалению, произошла ошибка при загрузке страницы. Попробуйте обновить страницу.</p>
+          </div>
+        </div>
+      `;
+    }
   }
 
   /**
