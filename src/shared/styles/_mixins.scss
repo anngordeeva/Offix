@@ -67,6 +67,7 @@
 @mixin headline-one {
   font-size: $headline-one-desktop;
   line-height: 72px;
+  font-weight: 500;
 
   @include tablet {
     font-size: $headline-one-mobile;
@@ -77,6 +78,7 @@
 @mixin headline-two {
   font-size: $headline-two-desktop;
   line-height: 48px;
+  font-weight: 500;
 
   @include tablet {
     font-size: $headline-two-mobile;
@@ -87,6 +89,7 @@
 @mixin headline-three {
   font-size: $headline-three-desktop;
   line-height: 36px;
+  font-weight: 500;
 
   @include tablet {
     font-size: $headline-three-mobile;
@@ -97,6 +100,7 @@
 @mixin headline-four {
   font-size: $headline-four-desktop;
   line-height: 28px;
+  font-weight: 500;
 
   @include tablet {
     font-size: $headline-four-mobile;

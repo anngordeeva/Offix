@@ -78,3 +78,45 @@
   grid-auto-flow: dense;
   gap: 48px 32px;
 }
+
+@include laptop {
+  .offices-page__wrapper {
+    &.p-left {
+      padding-left: 32px;
+    }
+
+    &.color {
+      padding-right: 32px;
+    }
+  }
+}
+
+@include tablet {
+  .offices-page__wrapper {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 32px;
+
+    &.p-left {
+      padding-left: unset;
+    }
+
+    &.color {
+      padding-right: unset;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .container-grid__left {
+    gap: 16px;
+  }
+
+  .offices-page__list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+}
