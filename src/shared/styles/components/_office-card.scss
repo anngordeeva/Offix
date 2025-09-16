@@ -80,6 +80,8 @@
 
 .office-card__price {
   @include body;
+
+  font-weight: 500;
 }
 
 .office-card__date {
