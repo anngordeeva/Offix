@@ -9,7 +9,8 @@ export class Header {
     this.navLinks = [];
     this.header = null;
     this.isScrolled = false;
-    this.whiteBgPages = ["about", "faq"]; // Страницы с белым фоном
+    this.currentPage = "home"; // Текущая страница
+    this.whiteBgPages = ["offices"]; // Страницы с белым фоном по умолчанию (независимо от скролла)
   }
 
   init() {
@@ -19,13 +20,15 @@ export class Header {
     this.navLinks = document.querySelectorAll(".header__nav-link");
     this.logo = document.querySelector(".header__logo");
 
+    // Устанавливаем текущую страницу из URL
+    this.currentPage = this.getCurrentPage();
+
     this.bindEvents();
     this.setupMobileMenu();
     this.initScrollHandler();
     this.updateHeaderState();
 
-    const currentPage = this.getCurrentPage();
-    this.setActiveLink(currentPage);
+    this.setActiveLink(this.currentPage);
   }
 
   bindEvents() {
@@ -113,8 +116,11 @@ export class Header {
   updateHeaderState() {
     if (!this.header) return;
 
-    const currentPage = this.getCurrentPage();
-    const shouldHaveWhiteBg = this.isMenuOpen || this.isScrolled || this.whiteBgPages.includes(currentPage);
+    const isWhiteBgPage = this.whiteBgPages.includes(this.currentPage);
+
+    const shouldShowWhiteBgOnScroll = !isWhiteBgPage && this.isScrolled;
+
+    const shouldHaveWhiteBg = this.isMenuOpen || isWhiteBgPage || shouldShowWhiteBgOnScroll;
 
     if (shouldHaveWhiteBg) {
       this.header.classList.add("header--white-bg");
@@ -136,6 +142,7 @@ export class Header {
    * Обновляет состояние при изменении страницы
    */
   onPageChange(pageName) {
+    this.currentPage = pageName; // Обновляем текущую страницу
     this.updateHeaderState();
     this.setActiveLink(pageName);
   }
