@@ -26,3 +26,8 @@ dist-ssr
 # README files
 README.md
 **/README.md
+
+# Documentation and demo files
+src/modules/UNIVERSAL_FILTER_README.md
+src/modules/ARCHITECTURE_DIAGRAM.md
+src/pages/universal-demo.html

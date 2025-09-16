@@ -12,9 +12,11 @@ import "~/shared/styles/components/_layout.scss";
 import "~/shared/styles/components/_marquee.scss";
 import "~/shared/styles/components/_slider-main.scss";
 import "~/shared/styles/components/_hero.scss";
+import "~/shared/styles/components/_office-card.scss";
 //страницы
 import "~/shared/styles/pages/home/index.scss";
 import "~/shared/styles/pages/virtual-office/index.scss";
+import "~/shared/styles/pages/offices/index.scss";
 //слайдер
 import "swiper/css";
 import "swiper/css/navigation";

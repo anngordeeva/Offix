@@ -1,5 +1,9 @@
 import { Header } from "../components/Header.js";
 import { FaqAccordion } from "../modules/FaqAccordion.js";
+import { getActiveFilterConfigs, getAutoDetectedConfig } from "../modules/FilterConfigs.js";
+import { FilterManager } from "../modules/FilterManager.js";
+import { getActiveGridConfigs } from "../modules/GridConfigs.js";
+import { GridManager } from "../modules/GridManager.js";
 import { SmoothScroll } from "../modules/SmoothScroll.js";
 
 /**
@@ -11,6 +15,8 @@ export class App {
     this.components = {
       header: null,
       faqAccordion: null,
+      gridManager: null,
+      filterManager: null,
     };
     this.smoothScroll = new SmoothScroll();
   }
@@ -60,13 +66,13 @@ export class App {
         this.components.header.onPageChange(pageName);
       }
 
-      // Инициализируем слайдеры после загрузки страницы
       this.initSliders();
+
+      this.scrollToTop();
 
       // Страница загружена
     } catch {
       // Ошибка загрузки страницы
-      // Показываем простую страницу ошибки
       this.showErrorPage();
     }
   }
@@ -85,6 +91,61 @@ export class App {
     if (document.querySelector(".faq")) {
       this.components.faqAccordion = new FaqAccordion(".faq");
     }
+
+    // Инициализируем управление сетками и фильтрами
+    this.initGridManagers();
+    this.initFilterManagers();
+  }
+
+  /**
+   * Инициализирует управление сетками
+   */
+  initGridManagers() {
+    const activeConfigs = getActiveGridConfigs();
+
+    activeConfigs.forEach(config => {
+      this.components.gridManager = new GridManager(config);
+      this.components.gridManager.init();
+    });
+  }
+
+  /**
+   * Инициализирует управление кнопками фильтров
+   */
+  initFilterManagers() {
+    let activeConfigs = getActiveFilterConfigs();
+
+    // Если нет активных конфигураций, пытаемся определить автоматически
+    if (activeConfigs.length === 0) {
+      const autoConfig = getAutoDetectedConfig(this.currentPage);
+      if (autoConfig) {
+        activeConfigs = [autoConfig];
+      }
+    }
+
+    activeConfigs.forEach(config => {
+      this.components.filterManager = new FilterManager(config);
+      this.components.filterManager.init();
+
+      this.components.filterManager.setFilterChangeCallback((filterType, filteredData) => {
+        this.handleFilterChange(filterType, filteredData);
+      });
+    });
+  }
+
+  /**
+   * Обрабатывает изменение фильтра
+   * @param {string} filterType - тип фильтра
+   * @param {Array} filteredData - отфильтрованные данные
+   */
+  handleFilterChange() {
+    // Обновляем сетку если есть GridManager
+    if (this.components.gridManager) {
+      this.components.gridManager.update();
+    }
+
+    // Здесь можно добавить дополнительную логику для обработки фильтрации
+    // console.log(`Фильтр изменен на: ${filterType}, найдено элементов: ${filteredData.length}`);
   }
 
   /**
@@ -94,6 +155,17 @@ export class App {
     // Динамически импортируем и инициализируем слайдеры
     import("../modules/SlidersInit.js").then(({ initPageSliders }) => {
       initPageSliders(this.currentPage);
+    });
+  }
+
+  /**
+   * Скроллит страницу на самый верх
+   */
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
     });
   }
 
@@ -161,6 +233,9 @@ export class App {
 
       // Инициализируем слайдеры после загрузки страницы
       this.initSliders();
+
+      // Скроллим наверх страницы
+      this.scrollToTop();
     } catch {
       this.showErrorPage();
     }
