@@ -1,0 +1,328 @@
+.office-page {
+  padding-top: 120px;
+
+  .section__title {
+    max-width: 251px;
+  }
+}
+
+.office-page__container {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.office-page__root {
+  display: grid;
+  grid-template-columns: 1fr 23.5%;
+  min-height: 100vh;
+  padding-top: 96px;
+  gap: 32px;
+}
+
+.office-page__content-right {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  height: fit-content;
+}
+
+.office-page__section {
+  display: grid;
+  grid-template-columns: 23.5% 1fr 23.5%;
+  gap: 32px;
+  padding-top: 96px;
+
+  &.two-col {
+    grid-template-columns: 32% 1fr;
+  }
+
+  & > * {
+    min-width: 0;
+  }
+}
+
+.office-page__content-center {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;  
+  box-sizing: border-box;
+}
+
+.office-page__text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  h2 {
+    @include headline-two;
+
+    max-width: 675px
+  }
+
+  p {
+    @include body-large;
+
+    max-width: 675px;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px;
+      background-color: $light-gray;
+      min-height: 410px;
+
+      h3 {
+        @include headline-three;
+
+        margin-top: auto;
+        margin-bottom: 16px;
+      }
+
+      p {
+        @include body;
+
+        color: $dark-gray;
+      }
+
+      img {
+        height: 459px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      svg {
+        margin-bottom: 32px;
+      }
+    }
+  }
+}
+
+.office-page__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.office-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.office-page__title {
+  @include headline-one;
+}
+
+.office-page__price {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.office-page__price-value {
+  @include headline-three;
+}
+
+.office-page__price-period {
+  @include headline-four;
+  
+  color: $dark-gray;
+}
+
+.office-page__swiper {
+  display: none !important;
+
+  &--location {
+    display: block !important;
+    width: 100%;
+    max-width: 810px;
+    max-height: 459px;
+
+    .swiper-wrapper {
+      max-height: 459px;
+    }
+  }
+}
+
+.office-page__nav-list {
+  @include headline-four;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 32px;
+  color: $dark-gray;
+  text-transform: capitalize;
+}
+
+.office-page__nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  text-align: right;
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-color: $primary;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &.active {
+    color: $black;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+@include laptop {
+  .office-page__section {
+    grid-template-columns: 23.5% 1fr;
+  }
+}
+
+@include tablet {
+  .office-page  {
+    overflow: hidden;
+  }
+
+  .office-page__section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .office-page__container {
+    padding-top: 182px;
+  }
+
+  .office-page__root {
+    display: block;
+    padding-top: 48px;
+  }
+
+  .office-page__content-right {
+    position: static;
+  }
+
+  .office-page__text-content {
+    h2, p {
+      max-width: 100%;
+    }
+
+    ul {
+      li {
+        padding: 32px;
+        min-height: 238px;
+      }
+    }
+  }
+
+  .office-page__swiper {
+    display: block !important;
+    max-width: 100%;
+    width: 100%;
+    height: 343px;
+    overflow: visible !important;
+
+    .swiper-slide img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .office-page__header {
+    position: fixed;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    left: 0;
+    top: 80px;
+    width: 100%;
+    padding: 48px 16px 32px;
+    background-color: $white;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+
+    &.scroll {
+      gap: 8px;
+      padding: 24px 16px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        right: 16px;
+        width: 46px;
+        height: 46px;
+        background-image: url("../../../assets/icons/ArrowRight.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px;
+        background-color: $primary;
+        margin-left: 8px;
+      }
+
+      .office-page__title,
+      .office-page__price {
+        max-width: calc(100% - 48px);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .office-page__title {
+        @include headline-four;
+      }
+
+      .office-page__price-value {
+        @include body;
+
+        font-weight: 500;
+      }
+
+      .office-page__price-period {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+
+  .office-page__content-right {
+    display: none;
+  }
+}
+
+@include mobile {
+  .office-page__text-content {
+    ul {
+      display: flex;
+      flex-direction: column;
+    }
+
+    img {
+      max-height: 343px;
+      height: 343px;
+      object-fit: cover;
+    }
+  }
+
+  .office-page__swiper--location {
+    max-height: 343px;
+  }
+}

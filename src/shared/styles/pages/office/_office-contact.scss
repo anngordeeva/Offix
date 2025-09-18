@@ -1,0 +1,64 @@
+.office-contact {
+  background-color: $light-gray;
+
+  .section__title {
+    border-color: $gray;
+  }
+}
+
+.office-contact__content {
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.office-contact__root {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 550px;
+  color: $black;
+}
+
+.office-contact__title {
+  @include headline-two;
+
+  letter-spacing: -2px;
+}
+
+.office-contact__button {
+  @include button($primary, $white, $white-6, $white);
+
+  &.desktop {
+    display: flex;
+  }
+
+  &.mobile {
+    display: none;
+  }
+}
+
+.office-contact__description {
+  @include body;
+}
+
+@include tablet {
+  .office-contact__content {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .office-contact__root {
+    max-width: 100%;
+  }
+
+  .office-contact__button {
+    &.desktop {
+      display: none;
+    }
+
+    &.mobile {
+      display: flex;
+    }
+  }
+}

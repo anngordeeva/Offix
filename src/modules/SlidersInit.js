@@ -96,6 +96,45 @@ function getSlidersConfig(pageName) {
         },
       },
     },
+    office: {
+      ".office-page__swiper": {
+        slidesPerView: "auto",
+        centeredSlides: true,
+        spaceBetween: 8,
+        watchSlidesProgress: true,
+
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      },
+      ".office-page__swiper--location": {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 0,
+        watchSlidesProgress: true,
+
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      },
+      ".offices__swiper": {
+        slidesPerView: "auto",
+        centeredSlides: false,
+        loop: true,
+        initialSlide: 0,
+        spaceBetween: 32,
+        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
+        slidesOffsetAfter: 0,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        navigation: {
+          nextEl: ".swiper__button-next",
+          prevEl: ".swiper__button-prev",
+        },
+      },
+    },
     about: {
       // TODO: add config all page
     },
@@ -109,6 +148,8 @@ function getSlidersConfig(pageName) {
  * @param {string} pageName - Название страницы (home, about, etc.)
  */
 export function initPageSliders(pageName = "home") {
+  // Запоминаем текущую страницу для корректной реинициализации на resize
+  currentPageName = pageName;
   const config = getSlidersConfig(pageName);
 
   if (!config) {
@@ -120,6 +161,16 @@ export function initPageSliders(pageName = "home") {
     // Отключаем offices__swiper и news__swiper на планшетах и мобильных
     if ((selector === ".offices__swiper" || selector === ".news__swiper") && !isDesktop()) {
       return; // Пропускаем инициализацию этих слайдеров
+    }
+
+    // Для галереи инициализируем только на планшетах и мобильных
+    if (selector === ".office-page__swiper" && isDesktop()) {
+      return;
+    }
+
+    const element = document.querySelector(selector);
+    if (!element) {
+      return;
     }
 
     swiperManager.initSwiperWhenReady(selector, options);
@@ -146,14 +197,23 @@ export function destroyAllSliders() {
  * Обработчик изменения размера окна для переинициализации слайдеров
  */
 let resizeTimeout;
+let currentPageName = "home";
 window.addEventListener("resize", () => {
   clearTimeout(resizeTimeout);
   resizeTimeout = setTimeout(() => {
     // Уничтожаем все слайдеры
     destroyAllSliders();
 
-    // Переинициализируем слайдеры с учетом нового размера экрана
-    const currentPage = document.body.dataset.page || "home";
-    initPageSliders(currentPage);
+    // Переинициализируем слайдеры с учетом нового размера экрана и актуальной страницы
+    initPageSliders(currentPageName);
   }, 250); // Задержка для оптимизации производительности
 });
+
+/**
+ * Принудительная переинициализация слайдеров (для галереи)
+ */
+export function reinitSliders() {
+  destroyAllSliders();
+  const currentPage = document.body.dataset.page || "home";
+  initPageSliders(currentPage);
+}
