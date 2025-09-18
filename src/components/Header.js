@@ -10,7 +10,7 @@ export class Header {
     this.header = null;
     this.isScrolled = false;
     this.currentPage = "home"; // Текущая страница
-    this.whiteBgPages = ["offices"]; // Страницы с белым фоном по умолчанию (независимо от скролла)
+    this.whiteBgPages = ["offices", "office"]; // Страницы с белым фоном по умолчанию (независимо от скролла)
   }
 
   init() {

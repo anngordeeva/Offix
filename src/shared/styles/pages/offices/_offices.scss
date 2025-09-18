@@ -92,13 +92,16 @@
 }
 
 @include tablet {
+  .offices-page__container {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .offices-page__wrapper {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding: 48px 16px;
     gap: 32px;
 
     &.p-left {
-      padding-left: unset;
+      padding-left: 16px;
     }
 
     &.color {

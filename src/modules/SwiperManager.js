@@ -1,5 +1,5 @@
 import Swiper from "swiper";
-import { EffectFade, Navigation } from "swiper/modules";
+import { EffectFade, Navigation, Pagination } from "swiper/modules";
 
 /**
  * Менеджер для управления Swiper слайдерами
@@ -21,12 +21,18 @@ export class SwiperManager {
       return null;
     }
 
+    // Если на элементе уже есть экземпляр, проверяем его состояние
     if (element.swiper) {
-      return element.swiper;
+      if (element.swiper.destroyed) {
+        element.swiper.destroy(true, true);
+        element.swiper = null;
+      } else {
+        return element.swiper;
+      }
     }
 
     const defaultOptions = {
-      modules: [Navigation, EffectFade],
+      modules: [Navigation, EffectFade, Pagination],
       loop: true,
       centeredSlides: true,
       navigation: {
@@ -73,6 +79,10 @@ export class SwiperManager {
     const swiper = this.swipers.get(selector);
     if (swiper) {
       swiper.destroy(true, true);
+      // Чистим ссылку на экземпляр у DOM-элемента, чтобы классы могли устанавливаться при реинициализации
+      if (swiper.el && swiper.el.swiper) {
+        swiper.el.swiper = null;
+      }
       this.swipers.delete(selector);
     }
   }
@@ -80,6 +90,9 @@ export class SwiperManager {
   destroyAll() {
     this.swipers.forEach(swiper => {
       swiper.destroy(true, true);
+      if (swiper.el && swiper.el.swiper) {
+        swiper.el.swiper = null;
+      }
     });
     this.swipers.clear();
   }

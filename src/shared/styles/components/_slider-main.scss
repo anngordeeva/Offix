@@ -289,3 +289,28 @@
 
   }
 }
+
+.swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+bottom: 24px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 6px !important;
+  height: 6px !important;
+  margin: 0 !important;
+  background: #FFFFFF80 !important;
+  backdrop-filter: blur(24px);
+  transition: width 0.3s ease;
+  opacity: 1 !important;
+
+
+  &-active {
+    width: 32px !important;
+    border-radius: 30px !important;
+    background: #FFFFFF !important;
+  }
+}

@@ -2,9 +2,13 @@ import { Header } from "../components/Header.js";
 import { FaqAccordion } from "../modules/FaqAccordion.js";
 import { getActiveFilterConfigs, getAutoDetectedConfig } from "../modules/FilterConfigs.js";
 import { FilterManager } from "../modules/FilterManager.js";
+import { Gallery } from "../modules/Gallery.js";
 import { getActiveGridConfigs } from "../modules/GridConfigs.js";
 import { GridManager } from "../modules/GridManager.js";
+import { ScrollHeader } from "../modules/ScrollHeader.js";
+import { getScrollHeaderConfig } from "../modules/ScrollHeaderConfigs.js";
 import { SmoothScroll } from "../modules/SmoothScroll.js";
+import { OfficeScrollSpy } from "../modules/OfficeScrollSpy.js";
 
 /**
  * Основной класс приложения
@@ -17,6 +21,8 @@ export class App {
       faqAccordion: null,
       gridManager: null,
       filterManager: null,
+      scrollHeader: null,
+      officeScrollSpy: null,
     };
     this.smoothScroll = new SmoothScroll();
   }
@@ -66,6 +72,12 @@ export class App {
         this.components.header.onPageChange(pageName);
       }
 
+      // Инициализация галерей на странице (универсально) - ДО слайдеров
+      if (document.querySelector(".gallery")) {
+        const gallery = new Gallery();
+        gallery.init();
+      }
+
       this.initSliders();
 
       this.scrollToTop();
@@ -95,6 +107,12 @@ export class App {
     // Инициализируем управление сетками и фильтрами
     this.initGridManagers();
     this.initFilterManagers();
+
+    // Инициализируем скролл для header элементов
+    this.initScrollHeader();
+
+    // Инициализируем scrollspy для страницы офиса
+    this.initOfficeScrollSpy();
   }
 
   /**
@@ -131,6 +149,51 @@ export class App {
         this.handleFilterChange(filterType, filteredData);
       });
     });
+  }
+
+  /**
+   * Инициализирует скролл для header элементов
+   */
+  initScrollHeader() {
+    // Уничтожаем предыдущий экземпляр если есть
+    if (this.components.scrollHeader) {
+      this.components.scrollHeader.destroy();
+    }
+
+    // Получаем конфигурацию для текущей страницы
+    const config = getScrollHeaderConfig(this.currentPage);
+
+    if (config && config.enabled) {
+      this.components.scrollHeader = new ScrollHeader(config);
+      this.components.scrollHeader.init();
+    }
+  }
+
+  /**
+   * Инициализирует scrollspy для страницы офиса
+   */
+  initOfficeScrollSpy() {
+    // Уничтожаем предыдущий экземпляр если есть
+    if (this.components.officeScrollSpy) {
+      this.components.officeScrollSpy.destroy();
+      this.components.officeScrollSpy = null;
+    }
+
+    if (this.currentPage !== "office") return;
+
+    const rootExists = document.querySelector(".office-page__root");
+    const navExists = document.querySelector(".office-page__nav-list");
+    const sectionsExist = document.querySelectorAll(".office-page__content-left .office-page__section").length > 0;
+
+    if (rootExists && navExists && sectionsExist) {
+      this.components.officeScrollSpy = new OfficeScrollSpy({
+        rootSelector: ".office-page__root",
+        navListSelector: ".office-page__nav-list",
+        sectionsSelector: ".office-page__content-left .office-page__section",
+        topOffsetPx: 120,
+      });
+      this.components.officeScrollSpy.init();
+    }
   }
 
   /**
@@ -187,6 +250,19 @@ export class App {
       }
     });
 
+    // Делегирование для перехода на страницу офиса с карточки (временное решение, пока нет API)
+    document.addEventListener("click", e => {
+      let target = e.target;
+      while (target && target !== document.body) {
+        if (target.classList && target.classList.contains("office-card__link")) {
+          e.preventDefault();
+          this.loadPage("office");
+          return;
+        }
+        target = target.parentElement;
+      }
+    });
+
     // Обработчик для модального окна
     document.addEventListener("click", e => {
       if (e.target.textContent === "TESTING") {
@@ -229,6 +305,12 @@ export class App {
       // Уведомляем header о смене страницы
       if (this.components.header) {
         this.components.header.onPageChange(pageName);
+      }
+
+      // Инициализация галерей на странице (универсально) - ДО слайдеров
+      if (document.querySelector(".gallery")) {
+        const gallery = new Gallery();
+        gallery.init();
       }
 
       // Инициализируем слайдеры после загрузки страницы

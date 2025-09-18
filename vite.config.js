@@ -25,7 +25,8 @@ export default defineConfig({
         "index": resolve(__dirname, './index.html'),
         "page.home": resolve(__dirname, './src/pages/home.html'),
         "page.virtual-office": resolve(__dirname, './src/pages/virtual-office.html'),
-        "page.offices": resolve(__dirname, './src/pages/offices.html')
+        "page.offices": resolve(__dirname, './src/pages/offices.html'),
+        "page.office": resolve(__dirname, './src/pages/office.html')
       }
     }
   }
