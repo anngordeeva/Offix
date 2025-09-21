@@ -1,14 +1,15 @@
 import { Header } from "../components/Header.js";
 import { FaqAccordion } from "../modules/FaqAccordion.js";
+import { FeedbackModal } from "../modules/FeedbackModal.js";
 import { getActiveFilterConfigs, getAutoDetectedConfig } from "../modules/FilterConfigs.js";
 import { FilterManager } from "../modules/FilterManager.js";
 import { Gallery } from "../modules/Gallery.js";
 import { getActiveGridConfigs } from "../modules/GridConfigs.js";
 import { GridManager } from "../modules/GridManager.js";
+import { OfficeScrollSpy } from "../modules/OfficeScrollSpy.js";
 import { ScrollHeader } from "../modules/ScrollHeader.js";
 import { getScrollHeaderConfig } from "../modules/ScrollHeaderConfigs.js";
 import { SmoothScroll } from "../modules/SmoothScroll.js";
-import { OfficeScrollSpy } from "../modules/OfficeScrollSpy.js";
 
 /**
  * Основной класс приложения
@@ -25,6 +26,10 @@ export class App {
       officeScrollSpy: null,
     };
     this.smoothScroll = new SmoothScroll();
+    this.feedbackModal = new FeedbackModal({
+      endpoint: "/add.php",
+      app: this, // Передаем ссылку на App для навигации
+    });
   }
 
   /**
@@ -183,7 +188,8 @@ export class App {
 
     const rootExists = document.querySelector(".office-page__root");
     const navExists = document.querySelector(".office-page__nav-list");
-    const sectionsExist = document.querySelectorAll(".office-page__content-left .office-page__section").length > 0;
+    const sectionsExist =
+      document.querySelectorAll(".office-page__content-left .office-page__section").length > 0;
 
     if (rootExists && navExists && sectionsExist) {
       this.components.officeScrollSpy = new OfficeScrollSpy({
@@ -263,10 +269,16 @@ export class App {
       }
     });
 
-    // Обработчик для модального окна
+    // Делегирование: кнопка с data-атрибутом открывает форму обратной связи
     document.addEventListener("click", e => {
-      if (e.target.textContent === "TESTING") {
-        this.showModal();
+      let target = e.target;
+      while (target && target !== document.body) {
+        if (target.matches("[data-feedback-modal]")) {
+          e.preventDefault();
+          this.feedbackModal.open();
+          return;
+        }
+        target = target.parentElement;
       }
     });
 

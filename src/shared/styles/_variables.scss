@@ -7,8 +7,6 @@ $color-muted: #888;
 $color-border: #2a2f3a;
 
 // Цвета для макета
-$color-bg-blue: #4a90e2;
-$color-yellow: #ffd700;
 $primary: #113e3a;
 $secondary: #142528;
 $white: #ffffff;
@@ -18,6 +16,8 @@ $light-gray: #f4f8f8;
 $dark-gray: #778b8e;
 $black: #0b1e21;
 $color-text-dark: #333333;
+$logo: #2E706A;
+
 
 // Типографика
 $font-family-base: "Manrope", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -55,3 +55,9 @@ $space-3: 0.75rem;
 $space-4: 1rem;
 $space-6: 1.5rem;
 $container-max: 1280px;
+
+//Иконки
+
+// дефолтная иконка-стрелка
+$arrow-mask-default: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1LjU4NTUgOS4zOTc5N0wxMC41MjMgMTQuNDYwNUMxMC40MTc0IDE0LjU2NiAxMC4yNzQzIDE0LjYyNTMgMTAuMTI1IDE0LjYyNTNDOS45NzU3MyAxNC42MjUzIDkuODMyNTggMTQuNTY2IDkuNzI3MDMgMTQuNDYwNUM5LjYyMTQ4IDE0LjM1NDkgOS41NjIxOSAxNC4yMTE4IDkuNTYyMTkgMTQuMDYyNUM5LjU2MjE5IDEzLjkxMzIgOS42MjE0OCAxMy43NzAxIDkuNzI3MDMgMTMuNjY0NUwxMy44Mjk4IDkuNTYyNUgyLjgxMjVDMi42NjMzMiA5LjU2MjUgMi41MjAyNCA5LjUwMzI0IDIuNDE0NzUgOS4zOTc3NUMyLjMwOTI2IDkuMjkyMjYgMi4yNSA5LjE0OTE4IDIuMjUgOUMyLjI1IDguODUwODIgMi4zMDkyNiA4LjcwNzc0IDIuNDE0NzUgOC42MDIyNUMyLjUyMDI0IDguNDk2NzYgMi42NjMzMiA4LjQzNzUgMi44MTI1IDguNDM3NUgxMy44Mjk4TDkuNzI3MDMgNC4zMzU0N0M5LjYyMTQ4IDQuMjI5OTIgOS41NjIxOSA0LjA4Njc3IDkuNTYyMTkgMy45Mzc1QzkuNTYyMTkgMy43ODgyMyA5LjYyMTQ4IDMuNjQ1MDggOS43MjcwMyAzLjUzOTUzQzkuODMyNTggMy40MzM5OCA5Ljk3NTczIDMuMzc0NjkgMTAuMTI1IDMuMzc0NjlDMTAuMjc0MyAzLjM3NDY5IDEwLjQxNzQgMy40MzM5OCAxMC41MjMgMy41Mzk1M0wxNS41ODU1IDguNjAyMDNDMTUuNjM3OCA4LjY1NDI3IDE1LjY3OTMgOC43MTYzMSAxNS43MDc2IDguNzg0NkMxNS43MzU5IDguODUyODggMTUuNzUwNCA4LjkyNjA4IDE1Ljc1MDQgOUMxNS43NTA0IDkuMDczOTIgMTUuNzM1OSA5LjE0NzEyIDE1LjcwNzYgOS4yMTU0QzE1LjY3OTMgOS4yODM2OSAxNS42Mzc4IDkuMzQ1NzMgMTUuNTg1NSA5LjM5Nzk3WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==");
+$arrow-mask-re-try: url("../assets/icons/ArrowsClockwise.svg")
