@@ -47,7 +47,7 @@
 .hero__title {
   @include headline-one;
 
-  letter-spacing: -2px;
+  letter-spacing: -3px;
 }
 
 .hero__description {
@@ -104,5 +104,15 @@
   .hero__container {
     min-height: 100%;
     height: auto;
+  }
+
+  .hero__arrow {
+    font-size: 10px;
+    line-height: 18px;
+
+    &::after {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
