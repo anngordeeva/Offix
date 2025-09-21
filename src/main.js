@@ -21,6 +21,7 @@ import "~/shared/styles/pages/home/index.scss";
 import "~/shared/styles/pages/virtual-office/index.scss";
 import "~/shared/styles/pages/offices/index.scss";
 import "~/shared/styles/pages/office/index.scss";
+import "~/shared/styles/pages/about-us/index.scss";
 //слайдер
 import "swiper/css";
 import "swiper/css/navigation";
