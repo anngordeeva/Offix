@@ -92,7 +92,7 @@
 }
 
 .header__button {
-  @include button($primary, $white, $white-6, $white);
+  @include button($logo, $white, $white-6, $white);
 }
 
 .burger {
