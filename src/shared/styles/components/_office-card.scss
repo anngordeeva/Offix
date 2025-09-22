@@ -50,6 +50,11 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+
+  &.blog {
+    gap: 8px;
+  }
 }
 
 .office-card__title {
@@ -90,10 +95,54 @@
   color: $dark-gray;
 }
 
-.office-card__link {
+.office-card__link,
+.blog-card__link {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.office-card__blog-date {
+  font-size: 12px;
+  line-height: 20px;
+  font-family: $font-family-mono;
+  color: $dark-gray;
+}
+
+.office-card__description {
+  @include body;
+
+  color: $dark-gray;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.office-card__more {
+  font-size: 16px;
+  line-height: 18px;
+  display: inline-block;
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: $black;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 }

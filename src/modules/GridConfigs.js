@@ -10,6 +10,13 @@ export const GRID_CONFIGS = {
     wideClass: "wide",
     tallClass: "tall",
   },
+  // Конфигурация для страницы блога
+  blog: {
+    gridSelector: ".offices-page__list",
+    cardSelector: ".office-card",
+    wideClass: "wide",
+    tallClass: "tall",
+  },
 };
 
 /**
