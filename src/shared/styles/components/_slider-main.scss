@@ -146,7 +146,8 @@
         display: inline-block;
         position: relative;
         width: fit-content;
-
+        cursor: pointer;
+        
         &::after {
           content: "";
           position: absolute;

@@ -50,6 +50,16 @@ export class App {
   }
 
   /**
+   * Возвращает страницу для активного пункта меню:
+   * office -> offices, blog-post -> blog, иначе — исходное имя
+   */
+  getMenuPageName(pageName) {
+    if (pageName === "office") return "offices";
+    if (pageName === "blog-post") return "blog";
+    return pageName;
+  }
+
+  /**
    * Загружает страницу
    */
   async loadPage(pageName) {
@@ -72,9 +82,10 @@ export class App {
 
       this.initComponents(); // Инициализируем компоненты после загрузки страницы
 
-      // Уведомляем header о смене страницы
+      // Уведомляем header о смене страницы (с учетом родительского меню)
       if (this.components.header) {
-        this.components.header.onPageChange(pageName);
+        const menuPageName = this.getMenuPageName(pageName);
+        this.components.header.onPageChange(menuPageName);
       }
 
       // Инициализация галерей на странице (универсально) - ДО слайдеров
@@ -256,10 +267,15 @@ export class App {
       }
     });
 
-    // Делегирование для перехода на страницу офиса с карточки (временное решение, пока нет API)
+    // Делегирование для перехода на страницы с карточек (временное решение, пока нет API)
     document.addEventListener("click", e => {
       let target = e.target;
       while (target && target !== document.body) {
+        if (target.classList && target.classList.contains("blog-card__link")) {
+          e.preventDefault();
+          this.loadPage("blog-post");
+          return;
+        }
         if (target.classList && target.classList.contains("office-card__link")) {
           e.preventDefault();
           this.loadPage("office");
@@ -314,9 +330,10 @@ export class App {
       this.currentPage = pageName;
       this.initComponents(); // Инициализируем компоненты после загрузки страницы
 
-      // Уведомляем header о смене страницы
+      // Уведомляем header о смене страницы (с учетом родительского меню)
       if (this.components.header) {
-        this.components.header.onPageChange(pageName);
+        const menuPageName = this.getMenuPageName(pageName);
+        this.components.header.onPageChange(menuPageName);
       }
 
       // Инициализация галерей на странице (универсально) - ДО слайдеров

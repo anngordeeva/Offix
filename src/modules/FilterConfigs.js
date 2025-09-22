@@ -21,6 +21,26 @@ export const FILTER_CONFIGS = {
       coworking: "coworking",
     },
   },
+  // Конфигурация для страницы блога
+  blog: {
+    filterSelector: ".offices-page__filter-button",
+    activeClass: "active",
+    cardSelector: ".office-card",
+    typeAttribute: "data-type",
+    defaultType: "all",
+    filterTypes: {
+      all: "all",
+      "business centers": "business-center",
+      coworkings: "coworking",
+      life: "life",
+    },
+    // Маппинг типов на текст для обновления счетчиков
+    typeMapping: {
+      "business-center": "business center",
+      coworking: "coworking",
+      life: "life",
+    },
+  },
   // Универсальная конфигурация для автоматического определения типов
   universal: {
     filterSelector: ".filter-button",
