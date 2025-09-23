@@ -168,6 +168,23 @@ function getSlidersConfig(pageName) {
         },
       },
     },
+    "blog-post": {
+      ".news__swiper": {
+        slidesPerView: "auto",
+        centeredSlides: false,
+        loop: true,
+        initialSlide: 0,
+        spaceBetween: 32,
+        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
+        slidesOffsetAfter: 0,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        navigation: {
+          nextEl: ".news__swiper-next",
+          prevEl: ".news__swiper-prev",
+        },
+      },
+    },
   };
 
   return baseConfig[pageName] || {};
