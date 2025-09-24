@@ -30,6 +30,7 @@ export default defineConfig({
         "page.about-us": resolve(__dirname, './src/pages/about-us.html'),
         "page.blog": resolve(__dirname, './src/pages/blog.html'),
         "page.blog-post": resolve(__dirname, './src/pages/blog-post.html'),
+        "page.contacts": resolve(__dirname, './src/pages/contacts.html'),
       }
     }
   }
