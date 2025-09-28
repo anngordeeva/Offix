@@ -38,7 +38,19 @@ export class App {
   init() {
     this.bindEvents();
     this.initComponents();
-    this.loadPage("home");
+    
+    // Определяем страницу из URL при инициализации
+    const initialPage = this.getPageFromUrl();
+    
+    // Если это прямой переход по URL (не через SPA), загружаем страницу без обновления истории
+    // Но сначала устанавливаем правильное состояние истории
+    if (window.location.pathname !== "/" && !window.history.state) {
+      // Устанавливаем начальное состояние истории для корректной работы кнопки "Назад"
+      window.history.replaceState({ page: initialPage }, "", window.location.pathname);
+      this.loadPageWithoutHistory(initialPage);
+    } else {
+      this.loadPage(initialPage);
+    }
 
     // Обработчик для кнопки "Назад" браузера
     window.addEventListener("popstate", event => {
@@ -66,6 +78,12 @@ export class App {
     try {
       // Загружаем HTML страницы
       const response = await fetch(`/src/pages/${pageName}.html`);
+      
+      // Проверяем статус ответа
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const html = await response.text();
 
       // Вставляем контент в контейнер страницы
@@ -99,8 +117,21 @@ export class App {
       this.scrollToTop();
 
       // Страница загружена
-    } catch {
-      // Ошибка загрузки страницы
+    } catch (error) {
+      console.error('Ошибка загрузки страницы:', error);
+      
+      // Если это не главная страница, пытаемся загрузить home как fallback
+      if (pageName !== "home") {
+        console.log('Пытаемся загрузить главную страницу как fallback...');
+        try {
+          await this.loadPage("home");
+          return;
+        } catch (fallbackError) {
+          console.error('Ошибка загрузки fallback страницы:', fallbackError);
+        }
+      }
+      
+      // Если и fallback не сработал, показываем страницу ошибки
       this.showErrorPage();
     }
   }
@@ -319,6 +350,12 @@ export class App {
     try {
       // Загружаем HTML страницы
       const response = await fetch(`/src/pages/${pageName}.html`);
+      
+      // Проверяем статус ответа
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const html = await response.text();
 
       // Вставляем контент в контейнер страницы
@@ -347,7 +384,8 @@ export class App {
 
       // Скроллим наверх страницы
       this.scrollToTop();
-    } catch {
+    } catch (error) {
+      console.error('Ошибка загрузки страницы (без истории):', error);
       this.showErrorPage();
     }
   }
@@ -357,8 +395,29 @@ export class App {
    */
   getPageFromUrl() {
     const path = window.location.pathname;
-    const page = path.split("/").pop() || "home";
-    return page.replace(".html", "");
+    
+    // Убираем начальный и конечный слеш
+    const cleanPath = path.replace(/^\/+|\/+$/g, '');
+    
+    // Если путь пустой или только слеш, возвращаем home
+    if (!cleanPath || cleanPath === '') {
+      return "home";
+    }
+    
+    // Получаем последнюю часть пути
+    const page = cleanPath.split("/").pop();
+    
+    // Убираем .html если есть
+    const pageName = page.replace(/\.html$/, "");
+    
+    // Список валидных страниц
+    const validPages = [
+      "home", "offices", "virtual-office", "about-us", 
+      "blog", "blog-post", "contacts", "office"
+    ];
+    
+    // Если страница валидна, возвращаем её, иначе home
+    return validPages.includes(pageName) ? pageName : "home";
   }
 
   /**
