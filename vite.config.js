@@ -31,6 +31,7 @@ export default defineConfig({
         "page.blog": resolve(__dirname, './src/pages/blog.html'),
         "page.blog-post": resolve(__dirname, './src/pages/blog-post.html'),
         "page.contacts": resolve(__dirname, './src/pages/contacts.html'),
+        "page.404": resolve(__dirname, './src/pages/404.html'),
       }
     }
   }
