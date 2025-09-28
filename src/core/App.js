@@ -55,14 +55,24 @@ export class App {
     // Определяем страницу из URL при инициализации
     const initialPage = this.getPageFromUrl();
 
+    console.log("init", {
+      initialPage,
+      windowLocationPathname: window.location.pathname,
+      windowHistoryState: window.history.state,
+    });
+
     // Если это прямой переход по URL (не через SPA), загружаем страницу без обновления истории
     // Но сначала устанавливаем правильное состояние истории
     if (window.location.pathname !== "/" && !window.history.state) {
+      console.log("провалился в if");
+
       // Устанавливаем начальное состояние истории для корректной работы кнопки "Назад"
       window.history.replaceState({ page: initialPage }, "", window.location.pathname);
       this.loadPageWithoutHistory(initialPage);
     } else {
+      console.log("провалился в else");
       this.loadPage(initialPage);
+      console.log("loadPage", JSON.stringify(initialPage, null, 2));
     }
 
     // Обработчик для кнопки "Назад" браузера
