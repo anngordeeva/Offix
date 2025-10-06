@@ -238,12 +238,19 @@
   }
 
   .office-page__text-content {
+    width: 100%;
+    
     h2, p {
       max-width: 100%;
     }
 
     ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+
       li {
+        width: 100%;
         padding: 32px;
         min-height: 238px;
       }
