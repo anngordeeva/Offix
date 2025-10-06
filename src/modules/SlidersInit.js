@@ -8,6 +8,10 @@ function isDesktop() {
   return window.innerWidth > 1150;
 }
 
+function isMobile() {
+  return window.innerWidth > 768;
+}
+
 /**
  * Получение конфигурации слайдеров для разных страниц
  * @param {string} pageName - Название страницы
@@ -17,33 +21,57 @@ function getSlidersConfig(pageName) {
   const baseConfig = {
     home: {
       ".offices__swiper": {
-        slidesPerView: "auto",
-        centeredSlides: false,
+        slidesPerView: 3,
         loop: true,
-        initialSlide: 0,
-        spaceBetween: 32,
-        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
-        slidesOffsetAfter: 0,
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
+        initialSlide: 1,
+        spaceBetween: 16,
+        speed: 800,
+        freeMode: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 0.8,
         navigation: {
           nextEl: ".swiper__button-next",
           prevEl: ".swiper__button-prev",
         },
+        breakpoints: {
+          1151: {
+            slidesPerView: "auto",
+            loop: false,
+            initialSlide: 1,
+            spaceBetween: 32,
+            speed: 800,
+            freeMode: true,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 0.8,
+            watchSlidesVisibility: true,
+          },
+        },
       },
       ".news__swiper": {
-        slidesPerView: "auto",
-        centeredSlides: false,
+        slidesPerView: 3,
         loop: true,
-        initialSlide: 0,
-        spaceBetween: 32,
-        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
-        slidesOffsetAfter: 0,
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
+        initialSlide: 1,
+        spaceBetween: 16,
+        speed: 800,
+        freeMode: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 0.8,
         navigation: {
           nextEl: ".news__swiper-next",
           prevEl: ".news__swiper-prev",
+        },
+        breakpoints: {
+          1151: {
+            slidesPerView: "auto",
+            loop: false,
+            initialSlide: 1,
+            spaceBetween: 32,
+            speed: 800,
+            freeMode: true,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 0.8,
+            watchSlidesVisibility: true,
+          },
         },
       },
       ".reviews__swiper": {
@@ -81,18 +109,30 @@ function getSlidersConfig(pageName) {
         },
       },
       ".news__swiper": {
-        slidesPerView: "auto",
-        centeredSlides: false,
+        slidesPerView: 3,
         loop: true,
-        initialSlide: 0,
-        spaceBetween: 32,
-        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
-        slidesOffsetAfter: 0,
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
+        initialSlide: 1,
+        spaceBetween: 16,
+        speed: 800,
+        freeMode: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 0.8,
         navigation: {
           nextEl: ".news__swiper-next",
           prevEl: ".news__swiper-prev",
+        },
+        breakpoints: {
+          1151: {
+            slidesPerView: "auto",
+            loop: false,
+            initialSlide: 1,
+            spaceBetween: 32,
+            speed: 800,
+            freeMode: true,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 0.8,
+            watchSlidesVisibility: true,
+          },
         },
       },
     },
@@ -120,18 +160,30 @@ function getSlidersConfig(pageName) {
         },
       },
       ".offices__swiper": {
-        slidesPerView: "auto",
-        centeredSlides: false,
+        slidesPerView: 3,
         loop: true,
-        initialSlide: 0,
-        spaceBetween: 32,
-        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
-        slidesOffsetAfter: 0,
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
+        initialSlide: 1,
+        spaceBetween: 16,
+        speed: 800,
+        freeMode: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 0.8,
         navigation: {
           nextEl: ".swiper__button-next",
           prevEl: ".swiper__button-prev",
+        },
+        breakpoints: {
+          1151: {
+            slidesPerView: "auto",
+            loop: false,
+            initialSlide: 1,
+            spaceBetween: 32,
+            speed: 800,
+            freeMode: true,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 0.8,
+            watchSlidesVisibility: true,
+          },
         },
       },
     },
@@ -153,35 +205,59 @@ function getSlidersConfig(pageName) {
         },
       },
       ".news__swiper": {
-        slidesPerView: "auto",
-        centeredSlides: false,
+        slidesPerView: 3,
         loop: true,
-        initialSlide: 0,
-        spaceBetween: 32,
-        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
-        slidesOffsetAfter: 0,
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
+        initialSlide: 1,
+        spaceBetween: 16,
+        speed: 800,
+        freeMode: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 0.8,
         navigation: {
           nextEl: ".news__swiper-next",
           prevEl: ".news__swiper-prev",
+        },
+        breakpoints: {
+          1151: {
+            slidesPerView: "auto",
+            loop: false,
+            initialSlide: 1,
+            spaceBetween: 32,
+            speed: 800,
+            freeMode: true,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 0.8,
+            watchSlidesVisibility: true,
+          },
         },
       },
     },
     "blog-post": {
       ".news__swiper": {
-        slidesPerView: "auto",
-        centeredSlides: false,
+        slidesPerView: 3,
         loop: true,
-        initialSlide: 0,
-        spaceBetween: 32,
-        slidesOffsetBefore: 424, // 392px (ширина слайда) + 32px (отступ)
-        slidesOffsetAfter: 0,
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
+        initialSlide: 1,
+        spaceBetween: 16,
+        speed: 800,
+        freeMode: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 0.8,
         navigation: {
           nextEl: ".news__swiper-next",
           prevEl: ".news__swiper-prev",
+        },
+        breakpoints: {
+          1151: {
+            slidesPerView: "auto",
+            loop: false,
+            initialSlide: 1,
+            spaceBetween: 32,
+            speed: 800,
+            freeMode: true,
+            freeModeMomentum: true,
+            freeModeMomentumRatio: 0.8,
+            watchSlidesVisibility: true,
+          },
         },
       },
     },
@@ -206,7 +282,7 @@ export function initPageSliders(pageName = "home") {
   // Инициализируем каждый слайдер из конфигурации
   Object.entries(config).forEach(([selector, options]) => {
     // Отключаем offices__swiper и news__swiper на планшетах и мобильных
-    if ((selector === ".offices__swiper" || selector === ".news__swiper") && !isDesktop()) {
+    if ((selector === ".offices__swiper" || selector === ".news__swiper") && !isMobile()) {
       return; // Пропускаем инициализацию этих слайдеров
     }
 

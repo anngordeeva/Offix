@@ -16,7 +16,7 @@
     height: auto;
     width: 392px;
     flex-shrink: 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
       .slider__image-wrapper::after {
@@ -34,9 +34,10 @@
 
     .slider__image-wrapper {
       position: relative;
-      width: 100%;
+      width: 392px;
       height: 260px; // Высота по умолчанию
       overflow: hidden;
+      transition: all 0.3s ease-in-out;
 
       &::after {
         content: "";
@@ -169,18 +170,12 @@
       }
     }
 
-    // Предыдущий слайд
-    &.swiper-slide-prev {
-      width: 392px;
-    }
-
-    // Активный слайд
     &.swiper-slide-active {
-      width: 675px; // Увеличиваем ширину активного слайда
+      width: 675px;
 
       .slider__image-wrapper {
-        height: 450px; // Увеличиваем высоту изображения
-        width: 100%;
+        height: 450px;
+        width: 675px;
 
         img {
           width: 100%;
@@ -202,6 +197,7 @@
     }
   }
 }
+
 .swiper_nav-wrapper {
   display: flex;
   align-items: center;
@@ -229,7 +225,6 @@
   transform: rotate(180deg);
 }
 
-// Специфичные стили для кнопок news__swiper
 .news__swiper-prev,
 .news__swiper-next {
   width: 46px;
@@ -265,29 +260,45 @@
   }
 
   .slider-main {
-    padding: 0;
     height: auto;
+    padding: 0;
+
+    .swiper-slide,
+    .swiper-slide.swiper-slide-active {
+      width: 100%;
+
+        .slider__image-wrapper {
+          width: 100%;
+          height: 300px;
+          min-height: 300px;
+        }
+
+        .slider__content {
+          justify-content: space-between;
+          height: 100%;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .slider-main {
+    padding: 0;
 
     .swiper-wrapper {
-      align-items: center;
+      display: flex;
       flex-direction: column;
       gap: 32px;
     }
 
-    .swiper-slide {
-      width: 100%;
+    .swiper-slide,
+    .swiper-slide.swiper-slide-active {
 
-      .slider__content{
-      .slider__content-wrapper {
-        gap: 8px;
-      }
+        .slider__image-wrapper {
+          height: 228px;
+          min-height: 228px;
+        }
     }
-    }
-
-    .slider__image-wrapper {
-      height: 228px;
-    }
-
   }
 }
 
@@ -296,7 +307,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-bottom: 24px !important;
+  bottom: 24px !important;
 }
 
 .swiper-pagination-bullet {

@@ -110,6 +110,10 @@
 }
 
 @include tablet {
+  .contacts {
+    padding-top: 64px;
+  }
+
   .contacts__container {
     gap: 0;
   }
@@ -118,9 +122,19 @@
     padding-top: 48px;
     padding-bottom: 48px;
     gap: 32px;
+    margin-right: -16px;
   }
 
   .contacts__map {
     height: 343px;
+    padding-right: 16px;
+  }
+
+  .contacts__item-list {
+    gap: 8px;
+
+     li {
+      font-size: 1.5rem;
+     }
   }
 }
