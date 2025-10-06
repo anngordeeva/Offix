@@ -194,6 +194,22 @@
   .office-page__section {
     grid-template-columns: 23.5% 1fr;
   }
+
+  .office-page__text-content {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        width: calc(50% - 16px);
+        padding: 32px;
+
+        h3 {
+          @include headline-four;
+        }
+      }
+    }
+  }
 }
 
 @include tablet {
